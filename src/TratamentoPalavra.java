@@ -18,7 +18,7 @@ public class TratamentoPalavra {
 
     }
     //Método para receber a Array de char, será utilizado no código main.
-    public char[] getPalavraEbaralhada()
+    public char[] getPalavraEmbaralhada()
     {
         char[] arrayDeChar = palavra.toCharArray();
         embaralharArray(arrayDeChar);
