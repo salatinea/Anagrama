@@ -1,37 +1,18 @@
 import java.util.Random;
 
 public class TratamentoPalavra {
+    final private String palavra;
+    final private String palavraEmbaralhada;
 
-    String palavra;
-
-    //Recebe uma palavra aleatório da Classe "BancoPalavras"
-    public TratamentoPalavra(String palavra){
+    // Recebe uma palavra aleatório da Classe "BancoPalavras"
+    public TratamentoPalavra(String palavra) {
         this.palavra = palavra;
+        this.palavraEmbaralhada = embaralharString(palavra);
     }
 
-    //Transforma a String recebida em uma Array de Char, e embaralha utilizando o método embaralharArray.
-    public void Embaralhar()
-    {
-        char[] arrayDeChar = palavra.toCharArray();
-        embaralharArray(arrayDeChar);
-        display(arrayDeChar);
+    // Método para receber a Array de char, será utilizado no código main.
 
-    }
-    //Método para receber a Array de char, será utilizado no código main.
-    public char[] getPalavraEmbaralhada()
-    {
-        char[] arrayDeChar = palavra.toCharArray();
-        embaralharArray(arrayDeChar);
-        return arrayDeChar;
-    }
-    //Método para receber o tamanho da Array de char, será utilizado no código main.
-    public int getArraydeCharLength()
-    {
-        char[] arrayDeChar = palavra.toCharArray();
-        embaralharArray(arrayDeChar);
-        return arrayDeChar.length;
-    }
-    //Recebe a Array de Char e troca aleatóriamente a posição de cada Char na Array
+    // Recebe a Array de Char e troca aleatóriamente a posição de cada Char na Array
     public static void embaralharArray(char[] array) {
         Random random = new Random();
         for (int i = array.length - 1; i > 0; i--) {
@@ -42,12 +23,23 @@ public class TratamentoPalavra {
             array[j] = temp;
         }
     }
-    //Imprime a Array de char embaralhada (na real eu não usei isso pra nada, sei nem pq tá aquikkkkkk)
-    public static void display(char[] array){
 
-        for(char c: array)
-        {
-            System.out.print(c + " ");
-        }
+    public static String embaralharString(String str) {
+        char[] array = str.toCharArray();
+        embaralharArray(array);
+        return String.valueOf(array);
+    }
+
+    // Método para receber o tamanho da Array de char, será utilizado no código main.
+    public String getPalavra() {
+        return palavra;
+    }
+
+    public char[] getPalavraEmbaralhada() {
+        return palavraEmbaralhada.toCharArray();
+    }
+
+    public int getLength() {
+        return palavra.length();
     }
 }
