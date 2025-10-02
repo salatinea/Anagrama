@@ -44,7 +44,7 @@ public class BancoPalavras {
                 }
             }
             Random random = new Random();
-            int NumPalavraAleatoria = random.nextInt(animais.length);
+            int NumPalavraAleatoria = random.nextInt(animaisComMenosDe10Letras.size());
             palavraAleatoria = animaisComMenosDe10Letras.get(NumPalavraAleatoria);
         }
         //Resolução 1600x900 suporta palavras com até 8 letras, acima disso, a visualização fica bugada, por falta de espaço na tela.
@@ -57,10 +57,34 @@ public class BancoPalavras {
                 }
             }
             Random random = new Random();
-            int NumPalavraAleatoria = random.nextInt(animais.length);
+            int NumPalavraAleatoria = random.nextInt(animaisComMenosDe8Letras.size());
             palavraAleatoria = animaisComMenosDe8Letras.get(NumPalavraAleatoria);
         }
+        else if (largura == 1280 && altura == 720) {
+            List<String> animaisComMenosDe8Letras = new ArrayList<>();
+            for (String animal : animais) {
+                if (animal.length() <= 8) {
+                    animaisComMenosDe8Letras.add(animal);
+                }
+            }
+            Random random = new Random();
+            int NumPalavraAleatoria = random.nextInt(animaisComMenosDe8Letras.size());
+            palavraAleatoria = animaisComMenosDe8Letras.get(NumPalavraAleatoria);
+        }
+        else{
+            List<String> animaisComMenosDe10Letras = new ArrayList<>();
+            for (String animal : animais) {
+                if (animal.length() <= 10) {
+                    animaisComMenosDe10Letras.add(animal);
+                }
+            }
+            Random random = new Random();
+            int NumPalavraAleatoria = random.nextInt(animaisComMenosDe10Letras.size());
+            palavraAleatoria = animaisComMenosDe10Letras.get(NumPalavraAleatoria);
+        }
     }
+
+
     //Retorna as palavras de acordo com a resolução da tela.
     public String getPalavraAleatoria() {
         return palavraAleatoria;
