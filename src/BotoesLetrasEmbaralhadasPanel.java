@@ -9,6 +9,8 @@ public class BotoesLetrasEmbaralhadasPanel extends JPanel {
 
     private final TratamentoPalavra palavra;
     private BotaoLetraClickListener listener;
+    private boolean[] estadoBotoes; // <<< array para guardar se o botão está apertado
+
     public BotoesLetrasEmbaralhadasPanel(TratamentoPalavra palavra) {
         setPreferredSize(new Dimension(width, height));
         setLayout(new FlowLayout(FlowLayout.CENTER, 1, 100));
@@ -35,11 +37,11 @@ public class BotoesLetrasEmbaralhadasPanel extends JPanel {
             botaoLetra.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (BotoesLetrasEmbaralhadasPanel.this.listener != null) {
+                    if (listener != null) {
                         listener.botaoLetraClicked(letra, posicao);
                     }
 
-                    // garantir que essa função seja executado apenas no primeiro clique no botão
+                    estadoBotoes[posicao] = true;
                     botaoLetra.setIcon(iconeLetraPress);
                     botaoLetra.setRolloverEnabled(false);
                 }
@@ -47,23 +49,29 @@ public class BotoesLetrasEmbaralhadasPanel extends JPanel {
         } else {
             botaoLetra.setIcon(iconeLetraPress);
             botaoLetra.setRolloverEnabled(false);
+            estadoBotoes[posicao] = true;
         }
 
         return botaoLetra;
     }
 
     public void setBotoesLetraApertados(boolean[] estadoBotoes) {
+        this.estadoBotoes = estadoBotoes;
         removeAll();
         for (int i = 0; i < palavra.getLength(); i++) {
-            // Iteração que passa por cada char, da array de char!
             char c = palavra.getPalavraEmbaralhada()[i];
             JToggleButton letraBotao = criarLetraBotao(c, i, estadoBotoes[i]);
             add(letraBotao);
         }
         revalidate();
+        repaint();
     }
 
     public void addBotaoLetraClickedListener(BotaoLetraClickListener listener) {
         this.listener = listener;
+    }
+
+    public boolean getEstadoBotao(int index) {
+        return estadoBotoes[index];
     }
 }

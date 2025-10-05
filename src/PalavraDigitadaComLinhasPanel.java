@@ -84,4 +84,15 @@ public class PalavraDigitadaComLinhasPanel extends JPanel {
         palavraDigitadaPanel.revalidate();
         palavraDigitadaPanel.repaint();
     }
+
+    public String getPalavraDigitada() {
+        StringBuilder sb = new StringBuilder();
+        for (Component c : palavraDigitadaPanel.getComponents()) {
+            if (c instanceof JLabel) {
+                JLabel label = (JLabel) c;
+                sb.append(label.getText());
+            }
+        }
+        return sb.toString();
+    }
 }
